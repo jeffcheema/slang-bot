@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Random; 
 /**
  * Write a description of class slangbot here.
  *
@@ -22,7 +23,8 @@ public class slangbot
         Scanner in = new Scanner (System.in);
     String statement = in.nextLine();
     String[] cleaned = cleanInput(statement);
-    defaults(cleaned);
+    String response = defaults(cleaned);
+    System.out.println(response);
     
     }
     }
@@ -33,6 +35,15 @@ public class slangbot
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
+    private static int getRandomNumberInRange(int min, int max) {
+
+		if (min >= max) {
+			throw new IllegalArgumentException("max must be greater than min");
+		}
+
+		Random r = new Random();
+		return r.nextInt((max - min) + 1) + min;
+	}
     public String[] cleanInput(String input){
     return input.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
     }
@@ -43,7 +54,7 @@ public class slangbot
         for (int a= 0; a < inputs[i].length; a++){
         for (int e=0; e < input.length; e++ ){
         if (input[e].equals(inputs[i][a]) || input[e].equals(inputs[i][a]+"s")){
-        System.out.println(outputs[i][0]);
+        System.out.println(outputs[i][getRandomNumberInRange(0,outputs[i].length - 1)]);
         
         }
         }
